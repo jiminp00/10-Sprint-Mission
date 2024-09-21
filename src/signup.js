@@ -1,17 +1,15 @@
-const emailContainer=document.querySelector('#email-input-container')
-const emailInput = emailContainer.querySelector('#email')
-const emailMsg = emailContainer.querySelector('#email-msg')
-const nameContainer=document.querySelector('#name-input-container')
-const nameInput = nameContainer.querySelector('#name')
-const nameMsg = nameContainer.querySelector('#name-msg')
-const passwordContainer=document.querySelector('#password-input-container')
-const passwordInput = passwordContainer.querySelector('#password')
-const passwordMsg = passwordContainer.querySelector('#password-msg')
-const passwordCheckContainer=document.querySelector('#password-check-input-container')
-const passwordCheckInput = passwordCheckContainer.querySelector('#password-check')
-const passwordCheckMsg = passwordCheckContainer.querySelector('#password-check-msg')
+const emailInput = document.querySelector('#email')
+const emailMsg = document.querySelector('#email-msg')
+const nameInput = document.querySelector('#name')
+const nameMsg = document.querySelector('#name-msg')
+const passwordInput = document.querySelector('#password')
+const passwordMsg = document.querySelector('#password-msg')
+const passwordCheckInput = document.querySelector('#password-check')
+const passwordCheckMsg = document.querySelector('#password-check-msg')
 const button = document.querySelector('#signup-button')
 
+const passwordVisibility = document.querySelector('.visibility-icon.password')
+const passwordCheckVisibility = document.querySelector('.visibility-icon.password-check')
 
 emailInput.addEventListener('focusout', emailValidCheck);
 nameInput.addEventListener('focusout', nameValidCheck);
@@ -22,6 +20,9 @@ emailInput.addEventListener('focusout', buttonActivate);
 nameInput.addEventListener('focusout', buttonActivate);
 passwordInput.addEventListener('focusout', buttonActivate);
 passwordCheckInput.addEventListener('focusout', buttonActivate);
+
+passwordVisibility.addEventListener('click', visibilityToggle);
+passwordCheckVisibility.addEventListener('click', visibilityToggle);
 
 let emailValid=false;
 let nameValid=false;
@@ -43,15 +44,18 @@ function emailValidCheck() {
     
     if(email === ""){ 
         emailValid=false;
-        emailContainer.classList.add('warning');
+        emailInput.classList.add('warning');
+        emailMsg.classList.add('warning');
         emailMsg.textContent="이메일을 입력해주세요"
     }else if(!emailRegTest(email)) {
         emailValid=false;
-        emailContainer.classList.add('warning');
+        emailInput.classList.add('warning');
+        emailMsg.classList.add('warning');
         emailMsg.textContent="잘못된 이메일 형식입니다"
     }else{
         emailValid=true;
-        emailContainer.classList.remove('warning');
+        emailInput.classList.remove('warning');
+        emailMsg.classList.remove('warning');
     }
 }
 
@@ -70,11 +74,13 @@ function nameValidCheck() {
     
     if(name === ""){ 
         nameValid=false;
-        nameContainer.classList.add('warning');
+        nameInput.classList.add('warning');
+        nameMsg.classList.add('warning');
         nameMsg.textContent="닉네임을 입력해주세요"
     }else{
         nameValid=true;
-        nameContainer.classList.remove('warning');
+        nameInput.classList.remove('warning');
+        nameMsg.classList.remove('warning');
     }
 }
 
@@ -83,15 +89,18 @@ function passwordValidCheck() {
 
     if(password === ""){ 
         passwordValid=false;
-        passwordContainer.classList.add('warning');
+        passwordInput.classList.add('warning');
+        passwordMsg.classList.add('warning');
         passwordMsg.textContent="비밀번호를 입력해주세요"
     }else if(password.length < 8) {
         passwordValid=false;
-        passwordContainer.classList.add('warning');
+        passwordInput.classList.add('warning');
+        passwordMsg.classList.add('warning');
         passwordMsg.textContent="비밀번호를 8자 이상 입력해주세요"
     }else{
         passwordValid=true;
-        passwordContainer.classList.remove('warning');
+        passwordInput.classList.remove('warning');
+        passwordMsg.classList.remove('warning');
     }
 }
 
@@ -101,10 +110,35 @@ function passwordCheckValidCheck() {
 
     if(passwordCheck === password){ 
         passwordCheckValid=true;
-        passwordCheckContainer.classList.remove('warning');
+        passwordCheckInput.classList.remove('warning');
+        passwordCheckMsg.classList.remove('warning');
     }else{
         passwordCheckValid=false;
-        passwordCheckContainer.classList.add('warning');
+        passwordCheckInput.classList.add('warning');
+        passwordCheckMsg.classList.add('warning');
         passwordCheckMsg.textContent="비밀번호가 일치하지 않습니다"
+    }
+}
+
+function visibilityToggle(event) {
+    let input;
+    let visibility;
+    
+    if(event.target.classList.contains('password')){
+        // password 에서 이벤트 발생
+        input=passwordInput;
+        visibility=passwordVisibility;
+    } else {
+        // password-check 에서 이벤트 발생
+        input=passwordCheckInput;
+        visibility=passwordCheckVisibility;
+    }
+
+    if(input.type === "password"){
+        input.type = "text"
+        visibility.classList.add('visible');
+    } else {
+        input.type = "password"
+        visibility.classList.remove('visible');
     }
 }

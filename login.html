@@ -19,20 +19,21 @@
       <form class="fields">
         <div class="field">
           <label for="email">이메일</label>
-          <div id="email-input-container" class="input-container">
+          <div class="input-container">
             <input id="email" class="input" name="email" type="email" placeholder="이메일을 입력해주세요">
             <p id="email-msg" class="valid-msg"></p>
           </div>
         </div>
         <div class="field">
           <label for="password">비밀번호</label>
-          <div id="password-input-container" class="input-container">
-            <input id="password"  class="input" name="password"type="password" placeholder="비밀번호를 입력해주세요">
-            <img class="visibility-icon" src="assets/btn_visibility_off_24px.svg">
+          <div class="input-container">
+            <input id="password"  class="input" name="password" type="password" placeholder="비밀번호를 입력해주세요">
+            <img class="password visibility-icon" src="assets/btn_visibility_off_24px.svg">
             <p id="password-msg" class="valid-msg"></p>
           </div>
         </div>
-        <a id="login-button" href="/items.html">로그인</a>
+        <!-- 양식제출 & 이동 양립 안됨 이슈 -->
+        <button id="login-button" disabled="true" onclick="location.href='/items.html'">로그인</button>
       </form>
       <!-- sns 로그인 안내 -->  
       <div class="sns-login">

@@ -41,16 +41,16 @@
     outline: none;
 }
 /* warning 적용시의 스타일 */
-.input-container.warning > .input {
+.input.warning {
     border-width: 2px;
     border-color: #F74747;
 }
 
-.input-container > .valid-msg {
+.valid-msg {
     display: none;
 }
 
-.input-container.warning > .valid-msg {
+.valid-msg.warning {
     display: block;
 }
 
@@ -60,16 +60,23 @@
     gap: 16px;
 }
 
-/* 심화과제: 인풋 필드 안에 눈 아이콘 넣기 */
 .input-container{
     width: 100%;
     position: relative;
 }
 
-.input-container>.visibility-icon {
+/* 심화과제: visibility toggle */
+.visibility-icon{
     position: absolute;
     right: 16px;
     top: 16px;
+
+    /* 디폴트는 invisible */
+    content: url("../assets/btn_visibility_off_24px.svg");
+}   
+
+.visibility-icon.visible{
+    content: url("../assets/btn_visibility_on_24px.svg");
 }
 
 .valid-msg {
@@ -83,6 +90,7 @@
 #login-button,
 #signup-button {
     padding: 12px 0;
+    height: 56px;
     border-radius: 40px;
     background-color: #3692FF;
     border-width: 0px; 
